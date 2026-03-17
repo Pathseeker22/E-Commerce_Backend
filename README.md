@@ -6,21 +6,21 @@
 
 ## Table of Contents
 
-- [Overview](#-overview)
-- [Features](#-features)
-- [Tech Stack](#-tech-stack)
-- [Project Structure](#-project-structure)
-- [Prerequisites](#-prerequisites)
-- [Getting Started](#-getting-started)
+- [Overview](#overview)
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Project Structure](#project-structure)
+- [Prerequisites](#prerequisites)
+- [Getting Started](#getting-started)
   - [Clone the Repository](#1-clone-the-repository)
-  - [Configure application.properties](#2-configure-application.properties)
+  - [Configure application.properties](#2-configure-applicationproperties)
   - [Run with Docker Compose](#3-run-with-docker-compose)
   - [Run Locally (Without Docker)](#4-run-locally-without-docker)
-- [Database Schema](#-database-schema)
-  - [Entity-Relationship (ER) diagram](#1-entity-relationship-diagram)
+- [Database Schema](#database-schema)
+  - [Entity-Relationship (ER) diagram](#1-entity-relationship-er-diagram)
   - [Table Structure](#2-table-structure)
   - [Useful SQL Commands](#3-useful-sql-commands)
-- [API Documentation](#-api-documentation)
+- [API Documentation](#api-documentation)
   - [Authentication](#1-authentication)
   - [Roles](#2-roles)
   - [API Endpoint Authorization](#3-api-endpoint-authorization)
@@ -28,16 +28,16 @@
   - [Product APIs](#5-product-apis)
   - [Cart APIs](#6-cart-apis)
   - [Order APIs](#7-order-apis)
-- [Exception Handling](#-exception-handling)
-- [Logging Strategy](#-logging-strategy)
-- [Testing](#-testing)
-- [Swagger UI Documentation](#-swagger-ui-documentation)
+- [Exception Handling](#exception-handling)
+- [Logging Strategy](#logging-strategy)
+- [Testing](#testing)
+- [Swagger UI Documentation](#swagger-ui-documentation)
 
 ## Overview
 
 **ECommerce Backend Platform** is a RESTful API-based production-ready engine designed to manage core operations of a digital storefront. Built using **Java 17** and **Spring Boot 3**, it acts as a scalable services layer intended for high-performance web or mobile clients.
 
-The system handles the entire digital storefront lifecycle—including stateless *JWT user authentication*, *dynamic product discovery*, *persistent shopping carts*, *order placement*, and *automated inventory tracking*.
+The system handles the entire digital storefront lifecycle including stateless *JWT user authentication*, *dynamic product discovery*, *persistent shopping carts*, *order placement*, and *automated inventory tracking*.
 
 Following industry-standard **layered architecture** (Controller → Service → Repository → Entity), the project utilizes DTOs with ModelMapper for clean data transfer, SLF4J for logging audit trails, and Swagger UI for interactive API documentation. The environment is fully containerized via Docker Compose for zero-config deployment.
 
@@ -45,7 +45,7 @@ Following industry-standard **layered architecture** (Controller → Service →
 
 | Feature | Description |
 |---|---|
-| JWT Authentication | Stateless security using Spring Security + JWT tokens |
+| JWT Authentication | Stateless security using Spring Security and JWT tokens |
 | User Management | Account registration, secure login, and role-based access |
 | Product Catalog | CRUD operations with category filtering and pagination |
 | Cart Handling | Real-time shopping session management with price logic |
