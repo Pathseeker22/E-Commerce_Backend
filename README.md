@@ -236,6 +236,30 @@ The system uses Hibernate to manage the schema and data integrity constraints.
 | order_status | VARCHAR | PLACED, SHIPPED, DELIVERED |
 | payment_mode | VARCHAR | CREDIT_CARD, COD, UPI |
 
+#### Order Items Table
+| Column | Type | Description |
+|---|---|---|
+| id | BIGINT (PK) | Unique item id |
+| order_id | BIGINT (FK) | Link to Order parent |
+| product_id | BIGINT (FK) | Link to Product |
+| quantity | INT | Number of items |
+| price | DOUBLE | Price at time of purchase |
+
+#### Carts Table
+| Column | Type | Description |
+|---|---|---|
+| id | BIGINT (PK) | Unique cart id |
+| user_id | BIGINT (FK) | Owner of the cart |
+| total_price | DOUBLE | Computed cart total |
+
+#### Cart Items Table
+| Column | Type | Description |
+|---|---|---|
+| id | BIGINT (PK) | Unique item id |
+| cart_id | BIGINT (FK) | Parent cart link |
+| product_id | BIGINT (FK) | Reference to Product |
+| quantity | INT | Quantity in basket |
+
 ### 3. Useful SQL Commands
 You can inspect the running system using these queries in your MySQL client:
 
@@ -272,21 +296,21 @@ The API uses **Stateless JWT**. Secured endpoints require the header:
 ![User Registration](docs/screenshots/register_user.png)
 ![User Login](docs/screenshots/user_login.png)
 ![Admin Registration & Token Generation](docs/screenshots/admin_register_token_generation.png)
-> 💡 *Register users with unique emails. Use the login endpoint to generate a Bearer token for secured operations.*
+>  *Register users with unique emails. Use the login endpoint to generate a Bearer token for secured operations.*
 
 ### 5. Product APIs
 ![Get All Products](docs/screenshots/get_all_products.png)
-> 💡 *Products support comprehensive filtering by category and price range, with server-side pagination.*
+>  *Products support comprehensive filtering by category and price range, with server-side pagination.*
 
 ### 6. Cart APIs
 ![Add to Cart](docs/screenshots/add_to_cart.png)
-> 💡 *Shopping Cart management includes adding items, updating quantities, and real-time total calculation.*
+>  *Shopping Cart management includes adding items, updating quantities, and real-time total calculation.*
 
 ### 7. Order APIs
 ![Order Checkout](docs/screenshots/checkout.png)
 ![Order History](docs/screenshots/order_history.png)
 ![Update Order Status](docs/screenshots/update_order_status.png)
-> 💡 *The checkout workflow handles payment modes, reduces inventory stock, and generates order history.*
+>  *The checkout workflow handles payment modes, reduces inventory stock, and generates order history.*
 
 ## Exception Handling
 The application uses a centralized global handler (`@RestControllerAdvice`) to translate server exceptions into clean JSON responses:
@@ -326,12 +350,12 @@ This collection includes:
 4. Start with the **1. Authentication & Users** folder to register/login and generate your token.
 
 ## Swagger UI Documentation
-To enhance developer experience and API consumption, this project integrates **SpringDoc OpenAPI 3 (Swagger UI)**. It provides a beautiful, interactive web interface to explore, test, and validate all REST endpoints directly from your browser—without needing external tools like Postman.
+To enhance developer experience and API consumption, this project integrates **SpringDoc OpenAPI 3 (Swagger UI)**. It provides a beautiful, interactive web interface to explore, test, and validate all REST endpoints directly from your browser without needing external tools like Postman.
 
 ### Accessing the Documentation
-👉 **`http://localhost:8080/swagger-ui/index.html`**
+ **`http://localhost:8080/swagger-ui/index.html`**
 
-### Recommended Workflow for Testing:
+### Workflow for Testing:
 1.  **Register/Login**: Use the `/api/users` endpoints to get a token.
 2.  **Authorize**: Click the green "Authorize" button at the top and paste your token.
-3.  **Interact**: Secured endpoints (marked with 🔒) will now be accessible based on your role.
+3.  **Interact**: Secured endpoints (marked with lock symbol) will now be accessible based on your role.
