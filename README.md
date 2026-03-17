@@ -31,6 +31,7 @@
 - [Exception Handling](#exception-handling)
 - [Logging Strategy](#logging-strategy)
 - [Testing](#testing)
+- [Postman Collection](#postman-collection)
 - [Swagger UI Documentation](#swagger-ui-documentation)
 
 ## Overview
@@ -309,6 +310,20 @@ To execute the suite:
 ```bash
 mvn test
 ```
+
+## Postman Collection
+For users who prefer using Postman for API testing, a pre-configured collection is included in the root directory: **`E-Commerce_Backend_APIs.json`**. 
+
+This collection includes:
+1. **Dynamic Authentication**: Automatically handles JWT token generation and storage via environment variables.
+2. **Complete Resource Coverage**: Pre-mapped requests for all Users, Products, Cart, and Order endpoints.
+3. **Admin Test Flows**: Pre-populated JSON bodies for adding products and updating order statuses.
+
+### How to use the collection:
+1. Open Postman.
+2. Import the `E-Commerce_Backend_APIs.json` file.
+3. Ensure the variable `base_url` is set to `http://localhost:8080`.
+4. Start with the **1. Authentication & Users** folder to register/login and generate your token.
 
 ## Swagger UI Documentation
 To enhance developer experience and API consumption, this project integrates **SpringDoc OpenAPI 3 (Swagger UI)**. It provides a beautiful, interactive web interface to explore, test, and validate all REST endpoints directly from your browser—without needing external tools like Postman.
