@@ -27,12 +27,12 @@ INSERT INTO users (name, email, password, role) VALUES
 -- Seed Product Catalog
 -- Real-world products across multiple categories
 INSERT INTO products (name, description, price, stock, category, image_url, rating) VALUES
-('iPhone 15 Pro', 'Titanium design, A17 Pro chip, powerful Pro camera system.', 999.00, 45, 'Electronics', './docs/products/iphone_15_pro.jpg', 4.9),
-('MacBook Air M2', '13.6-inch Liquid Retina display, MacBook Air with M2 chip.', 1099.00, 15, 'Electronics', './docs/products/macbook_air_m2.jpg', 4.8),
-('Sony WH-1000XM5', 'Premium noise-canceling headphones with exceptional sound.', 348.00, 80, 'Audio', './docs/products/sony_wh_1000xm5.jpg', 4.7),
-('Nike Air Jordan 1 Low', 'The Air Jordan 1 Low updates the classic sneaker with fresh colors.', 125.00, 25, 'Fashion', './docs/products/Nike_Air_Jordan_1_Low.jpg', 4.6),
-('Steelcase Gesture', 'Top-rated ergonomic office chair designed for multi-device posture.', 1350.00, 10, 'Office', './docs/products/Steelcase_Gesture.avif', 4.9),
-('Logitech MX Master 3S', 'Performance wireless mouse with quiet clicks and 8K DPI sensor.', 99.00, 120, 'Accessories', './docs/products/Logitech_MX_Master_3S.avif', 4.8);
+('iPhone 15 Pro', 'Titanium design, A17 Pro chip, powerful Pro camera system.', 999.00, 45, 'Electronics', 'https://m.media-amazon.com/images/I/81CgtwSII3L._AC_SX679_.jpg', 4.9),
+('MacBook Air M2', '13.6-inch Liquid Retina display, MacBook Air with M2 chip.', 1099.00, 15, 'Electronics', 'https://m.media-amazon.com/images/I/71jG+e7roXL._AC_SX679_.jpg', 4.8),
+('Sony WH-1000XM5', 'Premium noise-canceling headphones with exceptional sound.', 348.00, 80, 'Audio', 'https://m.media-amazon.com/images/I/51aXvjzcukL._AC_SX679_.jpg', 4.7),
+('Nike Air Jordan 1 Low', 'The Air Jordan 1 Low updates the classic sneaker with fresh colors.', 125.00, 25, 'Fashion', 'https://rukminim2.flixcart.com/image/832/832/xif0q/shoe/m/o/h/-original-imaggcawtbgvt7zx.jpeg?q=70', 4.6),
+('Steelcase Gesture', 'Top-rated ergonomic office chair designed for multi-device posture.', 1350.00, 10, 'Office', 'https://m.media-amazon.com/images/I/71uV6-O9tBL._AC_SL1500_.jpg', 4.9),
+('Logitech MX Master 3S', 'Performance wireless mouse with quiet clicks and 8K DPI sensor.', 99.00, 120, 'Accessories', 'https://m.media-amazon.com/images/I/61ni3t1ryQL._AC_SX679_.jpg', 4.8);
 
 -- Pre-initialize Carts for seeded users
 -- Every user must have exactly one cart
