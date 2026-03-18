@@ -68,25 +68,36 @@ public class OrderService {
 		OrderEntity orderEntity = new OrderEntity();
 		orderEntity.setUserEntity(userEntity);
 		orderEntity.setOrderDate(LocalDateTime.now());
-		orderEntity.setPaymentStatus("SUCCESS");
-		orderEntity.setOrderStatus("PLACED");
 		orderEntity.setPaymentMode(paymentMode != null ? paymentMode.trim().toUpperCase() : "COD");
+		
+		// Simulation of payment success/failure
+		boolean paymentSuccessful = !orderEntity.getPaymentMode().startsWith("FAIL");
+		
+		if (paymentSuccessful) {
+			orderEntity.setPaymentStatus("SUCCESS");
+			orderEntity.setOrderStatus("PLACED");
+			logger.info("Payment successful for user: {}", userEmail);
+		} else {
+			orderEntity.setPaymentStatus("FAILED");
+			orderEntity.setOrderStatus("CANCELLED");
+			logger.warn("Payment failed simulation for user: {}", userEmail);
+		}
 		
 		orderEntity = orderRepository.save(orderEntity);
 		
 		List<OrderItemEntity> orderItemEntities = new ArrayList<>();
-		
 		double totalAmount = 0;
 		
 		for(CartItemEntity cartItemEntity : cartItemEntities) {
 			ProductEntity productEntity = cartItemEntity.getProductEntity();
 			
-			if(productEntity.getStock() < cartItemEntity.getQuantity()) {
-				throw new RuntimeException("Product out of stock");
+			if(paymentSuccessful) {
+				if(productEntity.getStock() < cartItemEntity.getQuantity()) {
+					throw new RuntimeException("Product " + productEntity.getName() + " out of stock");
+				}
+				productEntity.setStock(productEntity.getStock() - cartItemEntity.getQuantity());
+				productRepository.save(productEntity);
 			}
-			
-			productEntity.setStock(productEntity.getStock() - cartItemEntity.getQuantity());
-			productRepository.save(productEntity);
 			
 			OrderItemEntity orderItemEntity = new OrderItemEntity();
 			orderItemEntity.setOrderEntity(orderEntity);
@@ -95,7 +106,6 @@ public class OrderService {
 			orderItemEntity.setPrice(productEntity.getPrice());
 			
 			totalAmount += productEntity.getPrice() * cartItemEntity.getQuantity();
-			
 			orderItemEntities.add(orderItemEntity);
 		}
 		
@@ -104,16 +114,22 @@ public class OrderService {
 		orderEntity.setTotalAmount(totalAmount);
 		orderEntity.setOrderItemEntities(orderItemEntities);
 		
-		cartItemRepository.deleteAll(cartItemEntities);
-		cartEntity.setTotalPrice(0.0);
-		cartRepository.save(cartEntity);
+		// Only clear cart if checkout/payment was successful
+		if (paymentSuccessful) {
+			cartItemRepository.deleteAll(cartItemEntities);
+			cartEntity.setTotalPrice(0.0);
+			cartRepository.save(cartEntity);
+		}
 		
 		OrderEntity savedOrder = orderRepository.save(orderEntity);
 		
 		// Send email notification
-		emailService.sendOrderConfirmation(savedOrder);
-		
-		logger.info("Successfully placed order with ID: {} for user: {}", savedOrder.getId(), userEmail);
+		if (paymentSuccessful) {
+			logger.info("Successfully placed order with ID: {} for user: {}", savedOrder.getId(), userEmail);
+			emailService.sendOrderConfirmation(savedOrder);
+		} else {
+			logger.warn("Order failed due to payment failure simulation. ID: {}", savedOrder.getId());
+		}
 		
 		return savedOrder;
 	}
